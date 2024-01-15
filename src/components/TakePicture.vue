@@ -7,7 +7,7 @@
       <q-btn icon-right="add_a_photo" label="Ambil Gambar" color="primary" @click="captureImage"></q-btn>
     </div>
     <div class="row justify-center q-mt-md" v-show="$state.image">
-      <q-btn label="Lanjut" color="primary" @click="processImage" :loading="loading"></q-btn>
+      <q-btn label="Lanjut" color="primary" @click="processImage"></q-btn>
     </div>
 
   </div>
@@ -18,7 +18,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { useImageStore } from 'src/stores/image';
 import { useDefectDetection } from 'src/composables/fruitDefectDetection';
 import { useLoadImage } from 'src/composables/loadImage';
-import { ref } from 'vue';
+import { useQuasar } from 'quasar';
 
 /**
  * TakePicture component for capturing and processing images.
@@ -29,7 +29,7 @@ import { ref } from 'vue';
  */
 
 const { $state } = useImageStore();
-const loading = ref(false)
+const { loading } = useQuasar();
 
 /**
  * Capture an image using the device camera.
@@ -68,16 +68,15 @@ async function captureImage() {
 
 const processImage = async (): Promise<void> => {
   try {
-    loading.value = true;
     $state.result.imageOutput = null
     $state.result.isDefected = false
     const originalImage = await useLoadImage($state.imageFile);
     useDefectDetection(originalImage);
   } catch (error) {
-    loading.value = false;
+    loading.hide()
     throw error
   } finally {
-    loading.value = false;
+    loading.hide()
   }
 }
 </script>
