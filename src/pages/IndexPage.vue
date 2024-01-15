@@ -1,10 +1,10 @@
 <template>
   <div id="home-page">
     <div class="container home-page-content">
+      <div class="text-h5 text-center">Guava Inspector</div>
       <div class="row justify-center items-center full-height">
         <div class="wrapper">
           <div class="row justify-center">
-            <div class="text-h5">Guava Inspector</div>
             <TakePicture />
           </div>
         </div>
