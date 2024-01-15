@@ -1,6 +1,5 @@
 import * as cv from '@techstark/opencv-js';
 import { useImageStore } from 'src/stores/image';
-import { Loading, QSpinnerGrid } from 'quasar';
 
 /**
  * Performs defect detection on an input image.
@@ -9,11 +8,6 @@ import { Loading, QSpinnerGrid } from 'quasar';
  * @returns A Promise that resolves to void.
  */
 export const useDefectDetection = async (image: cv.Mat) => {
-  Loading.show({
-    spinner: QSpinnerGrid,
-    spinnerColor: 'primary',
-    message: 'Memproses Gambar',
-  });
   const { $state, routeToSecondPage } = useImageStore();
 
   // Step 1: Input image
@@ -137,6 +131,6 @@ export const useDefectDetection = async (image: cv.Mat) => {
   kernel.delete();
   contours.delete();
   hierarchy.delete();
-  Loading.hide();
+
   routeToSecondPage();
 };

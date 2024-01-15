@@ -18,7 +18,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { useImageStore } from 'src/stores/image';
 import { useDefectDetection } from 'src/composables/fruitDefectDetection';
 import { useLoadImage } from 'src/composables/loadImage';
-import { useQuasar } from 'quasar';
+import { QSpinnerGrid, useQuasar } from 'quasar';
 
 /**
  * TakePicture component for capturing and processing images.
@@ -68,6 +68,11 @@ async function captureImage() {
 
 const processImage = async (): Promise<void> => {
   try {
+    loading.show({
+      spinner: QSpinnerGrid,
+      spinnerColor: 'primary',
+      message: 'Memproses Gambar'
+    })
     $state.result.imageOutput = null
     $state.result.isDefected = false
     const originalImage = await useLoadImage($state.imageFile);
