@@ -4,6 +4,7 @@
       <div class="row justify-center items-center full-height">
         <div class="wrapper">
           <div class="row justify-center">
+            <div class="text-h5">Guava Inspector</div>
             <TakePicture />
           </div>
         </div>
