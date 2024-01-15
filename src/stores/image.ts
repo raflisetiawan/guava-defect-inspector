@@ -9,6 +9,10 @@ export const useImageStore = defineStore('image', {
     result: {
       isDefected: false,
       imageOutput: null as Blob | null,
+      grayscaleOutput: null as Blob | null,
+      threshOutput: null as Blob | null,
+      medianOutput: null as Blob | null,
+      edgesOutput: null as Blob | null,
     },
   }),
   actions: {

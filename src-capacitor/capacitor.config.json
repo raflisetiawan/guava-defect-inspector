@@ -1,9 +1,0 @@
-{
-  "appId": "org.guavadefectdetector.app",
-  "appName": "GuavaDefectDetectorApp",
-  "webDir": "www",
-  "server": {
-    "androidScheme": "https"
-  },
-  "bundledWebRuntime": true
-}

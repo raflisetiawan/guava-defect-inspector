@@ -83,6 +83,42 @@ export const useDefectDetection = async (image: cv.Mat) => {
     }
   }, 'image/png');
 
+  cv.imshow(canvas, grayscale);
+  canvas.toBlob((blob) => {
+    if (blob) {
+      // Menyimpan blob ke state atau melakukan aksi lainnya
+      // Contoh menyimpan blob ke state
+      $state.result.grayscaleOutput = blob;
+    }
+  }, 'image/png');
+
+  cv.imshow(canvas, thresh);
+  canvas.toBlob((blob) => {
+    if (blob) {
+      // Menyimpan blob ke state atau melakukan aksi lainnya
+      // Contoh menyimpan blob ke state
+      $state.result.threshOutput = blob;
+    }
+  }, 'image/png');
+
+  cv.imshow(canvas, median);
+  canvas.toBlob((blob) => {
+    if (blob) {
+      // Menyimpan blob ke state atau melakukan aksi lainnya
+      // Contoh menyimpan blob ke state
+      $state.result.medianOutput = blob;
+    }
+  }, 'image/png');
+
+  cv.imshow(canvas, edges);
+  canvas.toBlob((blob) => {
+    if (blob) {
+      // Menyimpan blob ke state atau melakukan aksi lainnya
+      // Contoh menyimpan blob ke state
+      $state.result.edgesOutput = blob;
+    }
+  }, 'image/png');
+
   // Membersihkan sumber daya
   output.delete();
   // Clean up
