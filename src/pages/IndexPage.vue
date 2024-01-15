@@ -1,7 +1,13 @@
 <template>
   <div id="home-page">
     <div class="container home-page-content">
-      <div class="text-h5 text-center">Guava Inspector</div>
+      <q-header elevated>
+        <q-toolbar>
+
+          <q-toolbar-title class="text-center">Guava Inspector</q-toolbar-title>
+
+        </q-toolbar>
+      </q-header>
       <div class="row justify-center items-center full-height">
         <div class="wrapper">
           <div class="row justify-center">
