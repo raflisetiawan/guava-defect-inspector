@@ -7,7 +7,7 @@
       <q-btn icon-right="add_a_photo" label="Ambil Gambar" color="primary" @click="captureImage"></q-btn>
     </div>
     <div class="row justify-center q-mt-md" v-show="$state.image">
-      <q-btn label="Lanjut" color="primary" @click="processImage"></q-btn>
+      <q-btn label="Lanjut" color="primary" @click="processImage" :loading="loading"></q-btn>
     </div>
 
   </div>
@@ -18,6 +18,7 @@ import { Camera, CameraResultType } from '@capacitor/camera';
 import { useImageStore } from 'src/stores/image';
 import { useDefectDetection } from 'src/composables/fruitDefectDetection';
 import { useLoadImage } from 'src/composables/loadImage';
+import { ref } from 'vue';
 
 /**
  * TakePicture component for capturing and processing images.
@@ -28,6 +29,7 @@ import { useLoadImage } from 'src/composables/loadImage';
  */
 
 const { $state } = useImageStore();
+const loading = ref(false)
 
 /**
  * Capture an image using the device camera.
@@ -65,9 +67,17 @@ async function captureImage() {
  */
 
 const processImage = async (): Promise<void> => {
-  $state.result.imageOutput = null
-  $state.result.isDefected = false
-  const originalImage = await useLoadImage($state.imageFile);
-  useDefectDetection(originalImage);
+  try {
+    loading.value = true;
+    $state.result.imageOutput = null
+    $state.result.isDefected = false
+    const originalImage = await useLoadImage($state.imageFile);
+    useDefectDetection(originalImage);
+  } catch (error) {
+    loading.value = false;
+    throw error
+  } finally {
+    loading.value = false;
+  }
 }
 </script>
