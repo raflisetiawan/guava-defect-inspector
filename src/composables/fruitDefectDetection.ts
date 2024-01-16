@@ -18,7 +18,7 @@ export const useDefectDetection = async (image: cv.Mat) => {
   cv.cvtColor(input, grayscale, cv.COLOR_RGBA2GRAY);
 
   const thresh = new cv.Mat();
-  cv.threshold(grayscale, thresh, 128, 255, cv.THRESH_BINARY);
+  cv.threshold(grayscale, thresh, 100, 255, cv.THRESH_BINARY);
 
   const median = new cv.Mat();
   cv.medianBlur(thresh, median, 5);
@@ -29,7 +29,7 @@ export const useDefectDetection = async (image: cv.Mat) => {
 
   // Step 4: Edge detection
   const edges = new cv.Mat();
-  cv.Canny(bg, edges, 50, 150);
+  cv.Canny(bg, edges, 30, 90);
 
   // Step 5: Fill edges
   const kernel = cv.Mat.ones(5, 5, cv.CV_8U);
@@ -63,6 +63,8 @@ export const useDefectDetection = async (image: cv.Mat) => {
   }
 
   // Step 7: Classify
+  console.log(ratio);
+
   if (ratio > 0.2) {
     // console.log('Defected');
     $state.result.isDefected = true;
